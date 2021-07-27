@@ -65,6 +65,7 @@ for record in SeqIO.parse(gb_file, 'genbank'):
     organelle = "-"
     bold = "-"
     voucherID = "-"
+    note = "-"
 
     for feat in features:
         type = feat.type
@@ -89,9 +90,10 @@ for record in SeqIO.parse(gb_file, 'genbank'):
                 voucherID = "|".join(vals)
             elif type == 'gene' and k == 'gene':
                 gene = "|".join(vals)
+	    elif k == 'note':
+		note = "|".join(vals)
 
-
-    out = '\t'.join(map(str,[id, gene, organism, taxon, organelle, keyword_out, voucherID, bold, desc, taxontree]))
+    out = '\t'.join(map(str,[id, gene, organism, taxon, organelle, keyword_out, voucherID, bold, note, desc, taxontree]))
     print(out)
 
 #            print('subtype:\t' + k, end="")
