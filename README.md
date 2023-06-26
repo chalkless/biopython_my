@@ -9,3 +9,10 @@ $ pip install biopython
 conda install biopython
 ```
 ↑ condaを入れているときはpipを使うと環境を破壊するらしいのでcondaコマンドで入れる
+
+Ubuntuのときはaptで入る
+
+```
+$ sudo apt install python3-biopython
+```
+
