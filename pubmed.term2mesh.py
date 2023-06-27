@@ -10,7 +10,7 @@ Entrez.email = "A.N.Other@example.com"
 
 term_search = sys.argv[1]
 
-# eserach部
+# esearch部
 handle = Entrez.esearch(db = "pubmed", term = term_search, usehistory="y")
 records = Entrez.read(handle)
 
