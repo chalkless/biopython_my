@@ -3,7 +3,7 @@
 from Bio import Entrez
 import sys
 
-Entrez.email = "nakazato.tkr@gmail.com"
+Entrez.email = "A.N.Other@example.com"
 
 term_search = sys.argv[1]
 
