@@ -1,33 +1,43 @@
-#/usr/bin/env python3
+#!/usr/bin/env python3
 
 from Bio import Entrez
 import sys
+import re
+import time
+
 
 Entrez.email = "A.N.Other@example.com"
 
-term_search = sys.argv[1]
+f_in = sys.argv[1]
 
-# eserach部
-handle = Entrez.esearch(db = "pubmed", term = term_search, usehistory="y")
-records = Entrez.read(handle)
+with open(f_in) as f:
+    list = [s.rstrip() for s in f.readlines()]
 
-# print(records)
 
-token   = records['WebEnv']
-q_key   = records['QueryKey']
-count = int(records['Count'])
+# PMIDリストを100ごとに分割
+count = 100
+for i in range(0, len(list), count):
+    list_sub = list[i:i+count]
+    pmid_query = ",".join(list_sub)
+    # print(pmid_query)   # for debug
 
-# efetch部
-
-retmax = 1000
-
-for start in range(0, count, retmax):
-    handle = Entrez.efetch(db='pubmed', retmode='xml', restart=start, retmax=retmax, webenv=token, query_key=q_key)
-    records = Entrez.read(handle)
+    # PMID → abst
+    time.sleep(4)
+    handle = Entrez.efetch(db='pubmed', id=pmid_query, retmode='xml')
     
-    for record in records["PubmedArticle"]:
-        print(record["MedlineCitation"]["PMID"])
-        meshlist = record["MedlineCitation"]["MeshHeadingList"]
+    # ファイルに出力
+    f_out = f_in
+    f_out = re.sub(".txt", "", f_out)
+    f_out = re.sub(".pmid(s|)", "", f_out)
+    num = '{:0=4}'.format(i)
+    f_out += "." + num + ".abst.xml"
+    print(f_out)
 
-        for mesh in meshlist:
-            print(mesh)
+    f = open(f_out, 'x')
+    
+    line_xml_b = handle.read()
+    line_xml = line_xml_b.decode('utf-8')
+    # print(line_xml)   # for debug
+    f.write(line_xml)
+
+    f.close
