@@ -55,11 +55,14 @@ from Bio import Entrez
 Entrez.email = "..."
 
 handle = Entrez.efetch(db='pubmed', id=19304878, retmode='xml')
-records = Entrez.read(handle)
-for record in records["PubmedArticle"]:
-    title = record["MedlineCitation"]["Article"]["ArticleTitle"]
-    pmid  = record["MedlineCitation"]["PMID"]
 ```
+
+```
+# PMIDを,で区切ってstrで渡してabstを取得することもできる
+handle = Entrez.efetch(db='pubmed', id=pmid_query, retmode='xml')
+```
+
+
 ```
 (MEDLINE形式版)
 from Bio import Entrez
@@ -97,10 +100,22 @@ retmax = 1000
 
 for start in range(0, count, retmax):
     handle = Entrez.efetch(db='pubmed', retmode='xml', restart=start, retmax=retmax, webenv=token, query_key=q_key)
-    records = Entrez.read(handle)
-    ...
-    （ファイルに保存するとか、中身を処理するとか）
 ```
+- handle を　read()とかしてファイルに書き込んだりする
+
 
 ## データ処理編
+```
+    records = Entrez.read(handle)
+    # Entrez.read(handle)するとPythonのオブジェクトに変換される
+    
+```
+
 - PubMedデータ（MEDLINE形式 or XML）を処理して必要な部分を抽出
+
+```
+records = Entrez.read(handle)
+for record in records["PubmedArticle"]:
+    title = record["MedlineCitation"]["Article"]["ArticleTitle"]
+    pmid  = record["MedlineCitation"]["PMID"]
+```
