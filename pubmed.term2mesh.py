@@ -25,7 +25,7 @@ count = int(records['Count'])
 retmax = 1000
 
 for start in range(0, count, retmax):
-    handle = Entrez.efetch(db='pubmed', retmode='xml', restart=start, retmax=retmax, webenv=token, query_key=q_key)
+    handle = Entrez.efetch(db='pubmed', retmode='xml', retstart=start, retmax=retmax, webenv=token, query_key=q_key)
     records = Entrez.read(handle)
     
     for record in records["PubmedArticle"]:
