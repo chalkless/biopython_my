@@ -14,6 +14,14 @@ from Bio import Entrez
 Entrez.email = "A.N.Other@example.com"
 ```
 
+- NCBI_API_KEYを取得すると１秒間に3回までのリクエストが10回までに拡張される
+  - 取得方法：https://github.com/chalkless/lifesciDB/blob/master/edirect/README.md
+  - 参考までに、eutilsで作成するURLにapi_key=XXXをつける
+  - 以下のように指定
+```
+Entrez.api_key = "MyAPIkey"
+```
+
 ### キーワード検索からPMIDリストまで
 - 実際にNCBIに検索するところ
 ```
