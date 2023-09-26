@@ -14,8 +14,9 @@ term_search = sys.argv[1]
 handle = Entrez.esearch(db = "pubmed", term = term_search, usehistory="y")
 records = Entrez.read(handle)
 
-# print(records)
+#print(records)
 count   = records['Count']
+print(str(count) + " articles found", file=sys.stderr)
 
 if int(count) > 9999:
     print("Results: " + count, file=sys.stderr) 
@@ -29,7 +30,7 @@ count = int(records['Count'])
 # efetch部
 
 retmax = 1000
-
+print("Retrieving articles...", file=sys.stderr)
 for start in range(0, count, retmax):
     print(start, file=sys.stderr)
     handle = Entrez.efetch(db='pubmed', retmode='xml', retstart=start, retmax=retmax, webenv=token, query_key=q_key)
