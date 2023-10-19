@@ -7,7 +7,7 @@ import inspect
 import argparse
 from Bio import SeqIO
 
-debug = 2
+debug = 1
 
 # gb_file = sys.argv[1]     # input gb file path
 
