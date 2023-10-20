@@ -110,7 +110,7 @@ for record in SeqIO.parse(gb_file, 'genbank'):
                 elif k == 'note':
                     note = "|".join(vals)
                             
-        out = '\t'.join(map(str,[id, gene, organism, taxon, organelle, keyword_out, voucherID, bold, note, desc, taxontree]))
+        out = '\t'.join(map(str,[id, gene, date, organism, taxon, organelle, keyword_out, voucherID, bold, note, desc, taxontree]))
         print(out)
 
 #            print('subtype:\t' + k, end="")
