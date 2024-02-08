@@ -107,6 +107,8 @@ for record in SeqIO.parse(gb_file, 'genbank'):
                     voucherID = "|".join(vals)
                 elif type == 'gene' and k == 'gene':
                     gene = "|".join(vals)
+                elif k == 'product':
+                    product = "|".join(vals)
                 elif k == 'note':
                     note = "|".join(vals)
                             
