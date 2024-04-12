@@ -21,7 +21,9 @@ option_each = args.detail_each
 
 with open(file_gb_in) as handle:
     for record in GenBank.parse(handle):
-        print(inspect.getmembers(record))
+        if debug ==2:
+            print(inspect.getmembers(record))
+
         if option_each:
             print(record.accession, file=sys.stderr)
         taxonomy = record.taxonomy
