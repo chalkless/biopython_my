@@ -34,6 +34,8 @@ if len(file_in):
             handle = Entrez.efetch(db='pubmed', id=pmid_query, retmode='xml')
             records = Entrez.read(handle)
 
+            doi = ""
+            
             for record in records["PubmedArticle"]:
 
                 pmid  = record["MedlineCitation"]["PMID"]
